@@ -1,0 +1,74 @@
+import com.github.jengelman.gradle.plugins.shadow.transformers.ManifestResourceTransformer
+
+apply plugin: 'java'
+
+group = 'ru.gvsmirnov'
+version = '0.0.1'
+
+
+sourceCompatibility = JavaVersion.VERSION_1_7
+
+buildscript {
+  repositories {
+    maven {
+      name 'Shadow'
+      url 'http://dl.bintray.com/content/gvsmirnov/gradle-plugins'
+    }
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.github.jengelman.gradle.plugins:shadow:0.8.1'
+  }
+}
+
+repositories {
+  jcenter()
+  mavenCentral()
+}
+
+sourceSets {
+  perf
+}
+
+dependencies {
+  compile 'org.uncommons:uncommons-maths:1.2'
+  perfCompile 'org.openjdk.jmh:jmh-core:0.5.4'
+  perfCompile 'org.openjdk.jmh:jmh-generator-annprocess:0.5.4'
+
+  perfCompile project
+}
+
+apply plugin: "idea"
+idea {
+  module {
+    scopes.PROVIDED.plus  += configurations.perfCompile
+    scopes.PROVIDED.minus += configurations.compile
+  }
+}
+
+task perfJar(type: Jar, dependsOn: perfClasses) {
+  from sourceSets.perf.output + sourceSets.main.output
+}
+
+task benchmarks(dependsOn: perfJar) {
+
+  apply plugin: "shadow"
+
+  shadow {
+    classifier = "benchmarks"
+    includeDependenciesFor = ["runtime", "perfRuntime"]
+
+    transformer(ManifestResourceTransformer) {
+      mainClass = "org.openjdk.jmh.Main"
+    }
+  }
+
+  doLast {
+    shadowJar.execute()
+  }
+
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '1.11'
+}
