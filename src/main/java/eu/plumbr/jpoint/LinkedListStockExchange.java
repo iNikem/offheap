@@ -1,3 +1,5 @@
+package eu.plumbr.jpoint;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class LinkedListStockExchange implements StockExchange {
   }
 
   @Override
-  public void order(String ticket, int amount, double price, boolean buy) {
+  public void order(int ticket, int amount, int price, boolean buy) {
     trades.add(new Trade(ticket, amount, price, buy));
   }
 

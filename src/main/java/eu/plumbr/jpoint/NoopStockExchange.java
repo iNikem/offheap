@@ -1,7 +1,9 @@
+package eu.plumbr.jpoint;
+
 public class NoopStockExchange implements StockExchange {
   private boolean balance = false;
   @Override
-  public void order(String ticket, int amount, double price, boolean buy) {
+  public void order(int ticket, int amount, int price, boolean buy) {
     balance ^= buy;
   }
 

@@ -1,3 +1,5 @@
+package eu.plumbr.jpoint;
+
 import java.util.ArrayList;
 import java.util.List;
 

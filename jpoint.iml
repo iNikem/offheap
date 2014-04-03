@@ -16,10 +16,10 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="jpoint" scope="PROVIDED" />
     <orderEntry type="library" exported="" name="Gradle: uncommons-maths-1.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: jmh-core-0.5.4" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Gradle: jmh-generator-annprocess-0.5.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: jopt-simple-4.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: commons-math3-3.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: jmh-core-0.5.5" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: jmh-generator-annprocess-0.5.5" level="project" />
   </component>
 </module>
 
