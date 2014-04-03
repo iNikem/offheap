@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import sun.nio.ch.DirectBuffer;
 
 public class MappedFileStockExchange implements StockExchange {
 
@@ -40,6 +41,9 @@ public class MappedFileStockExchange implements StockExchange {
 
   public void destroy() {
     try {
+      if (((DirectBuffer) buffer).cleaner() != null) {
+        ((DirectBuffer) buffer).cleaner().clean();
+      }
       channel.close();
     } catch (IOException e) {
       throw new RuntimeException(e);
