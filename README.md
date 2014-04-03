@@ -1,7 +1,7 @@
 jpoint
 ======
 
-This is demo project for JPoint conference, demostrating various means of using off-heap storage for data accumulation and manipulating.
+This is demo project for JPoint conference, demonstrating various means of using off-heap storage for data accumulation and manipulating.
 
 On this author's MacBook Pro, end results are as follows:
 
