@@ -1,6 +1,7 @@
 package eu.plumbr.jpoint;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class ByteBufferStockExchange implements StockExchange {
 
@@ -42,6 +43,7 @@ public class ByteBufferStockExchange implements StockExchange {
     buffer = direct ?
         ByteBuffer.allocateDirect(TRADES_PER_DAY * flyweight.getObjectSize()) :
         ByteBuffer.allocate(TRADES_PER_DAY * flyweight.getObjectSize());
+    buffer.order(ByteOrder.nativeOrder());
   }
 
   private class BufferTrade {
@@ -68,7 +70,7 @@ public class ByteBufferStockExchange implements StockExchange {
       buffer.putInt(objectOffset + ticketOffset, ticket);
     }
 
-    public long getPrice() {
+    public int getPrice() {
       return buffer.getInt(objectOffset + priceOffset);
     }
 
@@ -76,7 +78,7 @@ public class ByteBufferStockExchange implements StockExchange {
       buffer.putInt(objectOffset + priceOffset, price);
     }
 
-    public long getAmount() {
+    public int getAmount() {
       return buffer.getInt(objectOffset + amountOffset);
     }
 

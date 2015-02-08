@@ -2,12 +2,12 @@ package eu.plumbr.jpoint;
 
 import java.util.concurrent.TimeUnit;
 import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.GenerateMicroBenchmark;
+import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 
 public class StockExchangeBenchmark {
-  @GenerateMicroBenchmark
+  @Benchmark
   @BenchmarkMode(Mode.AverageTime)
   @OutputTimeUnit(TimeUnit.MILLISECONDS)
   public double noop() {
@@ -18,7 +18,7 @@ public class StockExchangeBenchmark {
     return exchange.dayBalance();
   }
 
-  @GenerateMicroBenchmark
+  @Benchmark
   @BenchmarkMode(Mode.AverageTime)
   @OutputTimeUnit(TimeUnit.MILLISECONDS)
   public double linkedList() {
@@ -29,7 +29,7 @@ public class StockExchangeBenchmark {
     return exchange.dayBalance();
   }
 
-  @GenerateMicroBenchmark
+  @Benchmark
   @BenchmarkMode(Mode.AverageTime)
   @OutputTimeUnit(TimeUnit.MILLISECONDS)
   public double arrayList() {
@@ -40,7 +40,7 @@ public class StockExchangeBenchmark {
     return exchange.dayBalance();
   }
 
-  @GenerateMicroBenchmark
+  @Benchmark
   @BenchmarkMode(Mode.AverageTime)
   @OutputTimeUnit(TimeUnit.MILLISECONDS)
   public double unsafe() {
@@ -53,7 +53,7 @@ public class StockExchangeBenchmark {
     return result;
   }
 
-  @GenerateMicroBenchmark
+  @Benchmark
   @BenchmarkMode(Mode.AverageTime)
   @OutputTimeUnit(TimeUnit.MILLISECONDS)
   public double byteBuffer() {
@@ -66,7 +66,7 @@ public class StockExchangeBenchmark {
     return result;
   }
 
-  @GenerateMicroBenchmark
+  @Benchmark
   @BenchmarkMode(Mode.AverageTime)
   @OutputTimeUnit(TimeUnit.MILLISECONDS)
   public double directByteBuffer() {
@@ -79,7 +79,7 @@ public class StockExchangeBenchmark {
     return result;
   }
 
-  @GenerateMicroBenchmark
+  @Benchmark
   @BenchmarkMode(Mode.AverageTime)
   @OutputTimeUnit(TimeUnit.MILLISECONDS)
   public double mappedByteBuffer() {

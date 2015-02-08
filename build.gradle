@@ -1,75 +1,31 @@
-import com.github.jengelman.gradle.plugins.shadow.transformers.ManifestResourceTransformer
-
-apply plugin: 'java'
-
-group = 'ru.gvsmirnov'
-version = '0.0.1'
-
-
-sourceCompatibility = JavaVersion.VERSION_1_7
-
-buildscript {
-  repositories {
-    maven {
-      name 'Shadow'
-      url 'http://dl.bintray.com/content/gvsmirnov/gradle-plugins'
-    }
-    jcenter()
-  }
-  dependencies {
-    classpath 'com.github.jengelman.gradle.plugins:shadow:0.8.1'
-  }
+plugins {
+  id "me.champeau.gradle.jmh" version "0.1.2"
 }
+group = 'eu.plumbr'
 
 repositories {
-  mavenLocal()
   jcenter()
-  mavenCentral()
-}
-
-sourceSets {
-  perf
 }
 
 dependencies {
-  compile 'org.uncommons:uncommons-maths:1.2'
-  perfCompile 'org.openjdk.jmh:jmh-core:0.5.5'
-  perfCompile 'org.openjdk.jmh:jmh-generator-annprocess:0.5.5'
-
-  perfCompile project
+  jmh 'org.openjdk.jmh:jmh-core:1.0.1'
+  jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.0.1'
 }
 
 apply plugin: "idea"
 idea {
   module {
-    scopes.PROVIDED.plus  += configurations.perfCompile
-    scopes.PROVIDED.minus += configurations.compile
+    scopes.PROVIDED.plus += [configurations.jmh]
   }
 }
 
-task perfJar(type: Jar, dependsOn: perfClasses) {
-  from sourceSets.perf.output + sourceSets.main.output
-}
 
-task benchmarks(dependsOn: perfJar) {
-
-  apply plugin: "shadow"
-
-  shadow {
-    classifier = "benchmarks"
-    includeDependenciesFor = ["runtime", "perfRuntime"]
-
-    transformer(ManifestResourceTransformer) {
-      mainClass = "org.openjdk.jmh.Main"
-    }
-  }
-
-  doLast {
-    shadowJar.execute()
-  }
-
-}
-
-task wrapper(type: Wrapper) {
-  gradleVersion = '1.11'
+jmh {
+  include = '.*arrayList'
+  fork = 1
+  threads = 1
+  warmupIterations = 5
+  iterations = 10
+  timeUnit = 'ms'
+  jvmArgsAppend = '-verbose:gc -Xloggc:gc.log'
 }

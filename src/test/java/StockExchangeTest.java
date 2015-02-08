@@ -1,4 +1,4 @@
-import eu.plumbr.jpoint.MappedFileStockExchange;
+import eu.plumbr.jpoint.LinkedListStockExchange;
 import eu.plumbr.jpoint.StockExchange;
 
 public class StockExchangeTest {
@@ -8,7 +8,7 @@ public class StockExchangeTest {
   public static void main(String[] args) {
     long start = System.nanoTime();
     for(int i = 0; i < RUNS; i++) {
-      run(new MappedFileStockExchange());
+      run(new LinkedListStockExchange());
     }
     System.out.println((System.nanoTime() - start) / 1e9);
   }

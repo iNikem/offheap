@@ -6,7 +6,7 @@ import sun.misc.Unsafe;
 public class UnsafeStockExchange implements StockExchange {
 
   @Override
-  public void order(int ticket, int amount, int price, boolean buy) {
+  public synchronized void order(int ticket, int amount, int price, boolean buy) {
     UnsafeTrade trade = get(recordsCount++);
     trade.setTicket(ticket);
     trade.setAmount(amount);
@@ -15,7 +15,7 @@ public class UnsafeStockExchange implements StockExchange {
   }
 
   @Override
-  public double dayBalance() {
+  public synchronized double dayBalance() {
     double balance = 0;
     for (int i = 0; i < recordsCount; i++) {
       UnsafeTrade trade = get(i);

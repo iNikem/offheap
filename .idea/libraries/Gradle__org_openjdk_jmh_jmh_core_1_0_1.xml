@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.openjdk.jmh:jmh-core:1.0.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjdk.jmh/jmh-core/1.0.1/bb5e79c926a1210577a9a671fc0d4ed454cb4b93/jmh-core-1.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openjdk.jmh/jmh-core/1.0.1/c0b3c1893a6010430e811ee0f3eceb5f3be2bf48/jmh-core-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
