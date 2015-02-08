@@ -56,6 +56,20 @@ public class StockExchangeBenchmark {
   @Benchmark
   @BenchmarkMode(Mode.AverageTime)
   @OutputTimeUnit(TimeUnit.MILLISECONDS)
+  public double unsafePadded() {
+    UnsafePaddedStockExchange exchange = new UnsafePaddedStockExchange();
+    for (int i = 0; i < StockExchange.TRADES_PER_DAY; i++) {
+      exchange.order(i, i, i, (i & 1) == 0);
+    }
+    double result = exchange.dayBalance();
+    exchange.destroy();
+    return result;
+  }
+
+
+  @Benchmark
+  @BenchmarkMode(Mode.AverageTime)
+  @OutputTimeUnit(TimeUnit.MILLISECONDS)
   public double byteBuffer() {
     ByteBufferStockExchange exchange = new ByteBufferStockExchange(false);
     for (int i = 0; i < StockExchange.TRADES_PER_DAY; i++) {
